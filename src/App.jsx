@@ -1,11 +1,11 @@
-import './App.css'
+import './App.css';
 import { useState } from 'react';
-import Header from './components/Header'
-import Boards from './components/Boards'
-import SelectedBoard from './components/SelectedBoard'
-import NewBoardForm from './components/NewBoardForm'
-import Cards from './components/Cards'
-import NewCard from './components/NewCard'
+import Header from './components/Header';
+import Boards from './components/Boards';
+import SelectedBoard from './components/SelectedBoard';
+import NewBoardForm from './components/NewBoardForm';
+import Cards from './components/Cards';
+import NewCard from './components/NewCard';
 import axios from 'axios';
 
 const kbaseURL = 'http://localhost:5000';
@@ -36,17 +36,17 @@ function App() {
       id: 1,
       message: 'This is a card',
       likes: 0,
-      onDelete: () => {},
-      onLike: () => {},
+      onDelete: () => { },
+      onLike: () => { },
     },
     {
       id: 2,
       message: 'This is another card',
       likes: 0,
-      onDelete: () => {},
-      onLike: () => {},
+      onDelete: () => { },
+      onLike: () => { },
     }
-  ]
+  ];
 
   return (
     <div>
