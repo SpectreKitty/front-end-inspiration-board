@@ -7,6 +7,22 @@ import Cards from './components/Cards'
 import NewCard from './components/NewCard'
 
 function App() {
+  const cards = [
+    {
+      id: 1,
+      message: 'This is a card',
+      likes: 0,
+      onDelete: () => {},
+      onLike: () => {},
+    },
+    {
+      id: 2,
+      message: 'This is another card',
+      likes: 0,
+      onDelete: () => {},
+      onLike: () => {},
+    }
+  ]
 
   return (
     <div>
@@ -19,7 +35,7 @@ function App() {
         <NewBoard />
       </div>
       <div className='flex-container' >
-        <Cards />
+        <Cards boardTitle='Test Board' cards={cards}/>
         <NewCard />
       </div>
     </div>

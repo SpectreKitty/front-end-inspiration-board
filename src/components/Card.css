@@ -1,0 +1,38 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 200px;
+  height: 200px;
+  padding: 20px;
+  background-color: #fff8a5;
+  box-shadow: -5px 7px 7px #7E7E7E;
+  margin: 1em;
+}
+
+.card p {
+  font-weight: bold;
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.card-actions button {
+  background-color: #fff8a5;
+  border: none;
+  cursor: pointer;
+}
+
+.card-actions button:hover {
+  color: red;
+}
+.card-actions button:focus,
+.card-actions button:focus-visible {
+  outline: #fff8a5;
+  color: red;
+}
