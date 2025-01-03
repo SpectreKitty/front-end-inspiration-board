@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import './NewCard.css';
+import './NewCardForm.css';
 
 const NewCardForm = (props) => {
   const [formFields, setFormFields] = useState({
@@ -46,7 +46,7 @@ const NewCardForm = (props) => {
   };
 
   return (
-    <div className="section">
+    <div className="new-card-form">
     <h3>Create a New Card</h3>
     <form onSubmit={onFormSubmit}>
       <label htmlFor="message">Message:</label>

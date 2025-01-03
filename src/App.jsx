@@ -5,7 +5,7 @@ import Boards from './components/Boards';
 import SelectedBoard from './components/SelectedBoard';
 import NewBoardForm from './components/NewBoardForm';
 import Cards from './components/Cards';
-import NewCard from './components/NewCard';
+import NewCard from './components/NewCardForm';
 import axios from 'axios';
 
 const kbaseURL = 'http://localhost:5000';
