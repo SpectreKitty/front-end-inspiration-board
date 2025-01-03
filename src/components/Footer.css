@@ -1,0 +1,21 @@
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer p {
+  font-size: x-large;
+}
+
+.footer a {
+  text-decoration: underline;
+}
+
+.footer a:hover {
+  color: red;
+}
