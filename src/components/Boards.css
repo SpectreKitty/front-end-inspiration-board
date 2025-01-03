@@ -7,30 +7,18 @@ Boards.css
   margin: 1rem;
 }
 
-.boards-title {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  font-size: 1.5rem;
-  color: black;
-  background-color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
-  border: 1px solid black;
-}
-
 .boards-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  width: 15rem;
   border: 1px solid black;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  background-color: white;
+  margin-right: 2rem;
+  max-height: 9rem;
+  min-height: 9rem;
+  overflow: scroll;
+  display: block;
+  list-style-type: decimal;
+  margin-inline-end: 0px;
 }
 
 .boards-list li {
   padding: 0.5rem;
   cursor: pointer;
-  border-bottom: 1px solid black
 }

@@ -1,7 +1,5 @@
-// import { useState } from 'react';
 import PropTypes from 'prop-types';
 import './ComponentStyles.css';
-import './Boards.css';
 
 function SelectedBoard({ board }) {
   return (
