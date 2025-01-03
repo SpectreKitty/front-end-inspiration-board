@@ -1,7 +1,7 @@
 .new-card-form {
   display: grid;
   align-items: center;
-  flex: 100%;
+  flex: 49%;
   position: relative;
   border-radius: 10px; 
   padding: 1rem;
