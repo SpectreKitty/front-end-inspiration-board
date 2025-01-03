@@ -62,7 +62,10 @@ function App() {
     axios.post(`${kbaseURL}/boards`, data)
       .then((result) => {
         const boardData = result.data.board;
-        setBoardData((prevBoards) => [convertFromApi(boardData), ...prevBoards]);
+        setBoardData((prev) => ({
+          ...prev,
+          boards: [convertFromApi(boardData), ...prev.boards],
+        }));
       })
       .catch((error) => {
         console.log(error);
