@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import './NewBoard.css';
+import './NewBoardForm.css';
 
 const kDefaultFormState = {
   title: '',
@@ -31,8 +31,8 @@ const NewBoardForm = ({ handleSubmit }) => {
   }
 
   return (
-    <div className="section">
-      <h3>Create a New Board</h3>
+    <div className="component-section new-board-form">
+      <h3 className="component-title">Create a New Board</h3>
       {isFormVisible ? (
       <form className="formData" onSubmit={onHandleSubmit}>
         <label htmlFor="title">Title:</label>
@@ -41,8 +41,8 @@ const NewBoardForm = ({ handleSubmit }) => {
         <label htmlFor="owner">Owner&apos;s Name:</label>
         <input type="text" id="owner" name="owner" value={formData.owner} onChange={handleChange}/>
         
-        <div>
-          <p>Preview: </p>
+        <div className="preview">
+          <p>Preview </p>
           <p>Title: {formData.title}</p>
           <p>Owner: {formData.owner}</p>
         </div>
@@ -54,7 +54,7 @@ const NewBoardForm = ({ handleSubmit }) => {
       ):(
         <p>The form is hidden. Click &quot;Show Form&quot; to display it again</p>
         )}
-        <button type="button" onClick={toggleFormVisibility}>{isFormVisible ? 'Hide New Board Form' : 'Show Form'}</button>
+        <button className="show-hide-button" type="button" onClick={toggleFormVisibility}>{isFormVisible ? 'Hide New Board Form' : 'Show Form'}</button>
     </div>
   )
 }

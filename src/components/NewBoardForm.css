@@ -1,0 +1,18 @@
+.new-board-form {
+    display: grid;
+    align-items: center;
+}
+.show-hide-button {
+    margin-top: 1rem;
+    align-self: center;
+}
+
+.submitButton {
+    margin-top: 1rem;
+    align-self: center;
+}
+
+.preview p {
+    background-color: white;
+    border: none;
+}
