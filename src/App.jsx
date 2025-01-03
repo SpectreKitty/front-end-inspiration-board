@@ -51,12 +51,58 @@ function App() {
     getAllBoards();
   }, []);
 
-  const handleSelectBoard = (board) => {
-    setBoardData((prev) => ({
-      ...prev,
-      selectedBoard: board,
-    }));
+  const handleSelectBoard = async (board) => {
+    // Get board cards before setting the selected board
+    await axios.get(`${kbaseURL}/boards/${board.id}/cards`)
+      .then((result) => {
+        board.cards = result.data.cards;
+        setBoardData((prev) => ({
+          ...prev,
+          selectedBoard: board,
+        }));
+      })
+      .catch((error) => {
+        console.log('Unable to get cards for board: ', error);
+      });
   };
+
+  const handleDeleteCard = (cardId) => {
+    axios.delete(`${kbaseURL}/cards/${cardId}`)
+      .then(() => {
+        setBoardData((prev) => {
+          const updatedBoard = { ...prev.selectedBoard };
+          updatedBoard.cards = updatedBoard.cards.filter((card) => card.id !== cardId);
+          return {
+            ...prev,
+            selectedBoard: updatedBoard,
+          };
+        });
+       })
+      .catch((error) => {
+        console.log('Unable to delete card: ', error);
+      });
+  }
+
+  const handleLikeCard = (cardId) => {
+    axios.patch(`${kbaseURL}/cards/${cardId}/like`)
+      .then((result) => {
+        setBoardData((prev) => {
+          const updatedBoard = { ...prev.selectedBoard };
+          updatedBoard.cards = updatedBoard.cards.map((card) => {
+            return card.id === cardId
+              ? { ...card, like_count: result.data.like_count }
+              : card;
+          });
+          return {
+            ...prev,
+            selectedBoard: updatedBoard,
+          };
+        })
+      })
+      .catch((error) => { 
+        console.log('Unable to like card', error);
+      });
+  }
   
   const handleSubmit = (data) => {
     axios.post(`${kbaseURL}/boards`, data)
@@ -72,23 +118,6 @@ function App() {
       });
   };
 
-  const cardsTestData = [
-    {
-      id: 1,
-      message: 'This is a card',
-      likes: 0,
-      onDelete: () => { },
-      onLike: () => { },
-    },
-    {
-      id: 2,
-      message: 'This is another card',
-      likes: 0,
-      onDelete: () => { },
-      onLike: () => { },
-    }
-  ];
-
   return (
     <div>
       <div>
@@ -99,10 +128,20 @@ function App() {
         <SelectedBoard board={boards.selectedBoard} />
         <NewBoardForm handleSubmit={handleSubmit}/>
       </div>
-      <div className='flex-container' >
-        <Cards boardTitle='Test Board' cards={cardsTestData}/>
-        <NewCard />
-      </div>
+      {boards.selectedBoard
+        ? (
+          <div className='flex-container' >
+            <Cards
+              boardTitle={boards.selectedBoard.title}
+              cards={boards.selectedBoard.cards}
+              onDelete={handleDeleteCard}
+              onLike={handleLikeCard}
+            />
+            <NewCard />
+          </div>
+        )
+        : null
+      }
     </div>
   )
 }

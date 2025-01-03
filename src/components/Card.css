@@ -15,9 +15,13 @@
   font-weight: bold;
 }
 
+.card-actions p {
+  font-weight: normal;
+}
+
 .card-actions {
+
   display: flex;
-  align-items: center;
   justify-content: space-between;
   width: 100%;
 }
@@ -26,6 +30,7 @@
   background-color: #fff8a5;
   border: none;
   cursor: pointer;
+  margin-top: 0rem;
 }
 
 .card-actions button:hover {

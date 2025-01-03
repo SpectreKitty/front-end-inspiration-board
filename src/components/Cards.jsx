@@ -6,17 +6,23 @@ function Cards(props) {
   return (
     <div className="section">
       <h3>Cards for {props.boardTitle}</h3>
-      <div className='cards'>
-        {props.cards.map(card => {
-          return <Card
-            key={card.id}
-            message={card.message}
-            likes={card.likes}
-            onDelete={card.onDelete}
-            onLike={card.onLike}
-          />
-        })}
-      </div>
+      {
+        props.cards.length > 0
+        ? (
+          <div className='cards'>
+            {props.cards.map(card => {
+              return <Card
+                key={card.id}
+                id={card.id}
+                message={card.message}
+                likes={card.like_count}
+                onDelete={props.onDelete}
+                onLike={props.onLike}
+              />
+            })}
+          </div>)
+        : <p>No cards yet!</p>
+      }
     </div>
   );
 };
@@ -27,11 +33,11 @@ Cards.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       message: PropTypes.string.isRequired,
-      likes: PropTypes.number.isRequired,
-      onDelete: PropTypes.func.isRequired,
-      onLike: PropTypes.func.isRequired,
-    }).isRequired,
+      like_count: PropTypes.number.isRequired,
+    }).isRequired,  
   ).isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onLike: PropTypes.func.isRequired,
 };
 
 export default Cards;
