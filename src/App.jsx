@@ -120,9 +120,7 @@ function App() {
 
   return (
     <div>
-      <div>
-        <Header />
-      </div>
+      <Header />
       <div className='flex-container' >
         <Boards boards={boards.boards} onSelectBoard={handleSelectBoard} />
         <SelectedBoard board={boards.selectedBoard} />
