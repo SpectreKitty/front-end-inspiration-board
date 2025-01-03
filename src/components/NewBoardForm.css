@@ -16,3 +16,16 @@
     background-color: white;
     border: none;
 }
+
+/* Error Highlight for Input */
+input.error {
+  border: 2px solid red;
+  background-color: #ffe6e6;
+}
+
+/* Error Message Styling */
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: -10px;
+}

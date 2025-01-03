@@ -10,7 +10,7 @@ const kDefaultFormState = {
 const NewBoardForm = ({ handleSubmit }) => {
   const [formData, setFormData] = useState(kDefaultFormState);
   const [isFormVisible, setIsFormVisible] = useState(true);
-
+  const [errors, setErrors] = useState({});
 
   const handleChange = event => {
     const fieldName = event.target.name;
@@ -22,8 +22,17 @@ const NewBoardForm = ({ handleSubmit }) => {
 
   const onHandleSubmit = (event) => {
     event.preventDefault();
-    handleSubmit(formData);
-    setFormData(kDefaultFormState);
+    const newErrors = {};
+    if (!formData.title) newErrors.title = 'Title is required';
+    if (!formData.owner) newErrors.owner = 'Owner is required';
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+    } else {
+      handleSubmit(formData);
+      setFormData(kDefaultFormState);
+      setErrors({});
+    }
   };
 
   const toggleFormVisibility = () => {
@@ -36,10 +45,26 @@ const NewBoardForm = ({ handleSubmit }) => {
       {isFormVisible ? (
       <form className="formData" onSubmit={onHandleSubmit}>
         <label htmlFor="title">Title:</label>
-        <input type="text" id="title" name="title" value={formData.title} onChange={handleChange}/>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value={formData.title}
+          onChange={handleChange}
+          className={errors.title ? 'error' : ''}
+        />
+        {errors.title && <p className="error-message">{errors.title}</p>}
 
         <label htmlFor="owner">Owner&apos;s Name:</label>
-        <input type="text" id="owner" name="owner" value={formData.owner} onChange={handleChange}/>
+        <input
+          type="text"
+          id="owner"
+          name="owner"
+          value={formData.owner}
+          onChange={handleChange}
+          className={errors.owner ? 'error' : ''}
+        />
+        {errors.owner && <p className="error-message">{errors.owner}</p>}
         
         <div className="preview">
           <p>Preview </p>
