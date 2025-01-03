@@ -1,6 +1,8 @@
+import './Header.css';
+
 function Header() {
   return (
-    <h1 style={{justifySelf: 'center'}}>Inspiration Board</h1>
+    <h1>Inspiration Board</h1>
   )
 }
 
