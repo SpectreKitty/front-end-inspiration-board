@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import Card from './Card';
 import './Cards.css';
+import './ComponentStyles.css';
 
 function Cards(props) {
   return (
-    <div className="section">
-      <h3>Cards for {props.boardTitle}</h3>
+    <div className='component-section'>
+      <h3 className='component-title'>Cards for {props.boardTitle}</h3>
       {
         props.cards.length > 0
         ? (
