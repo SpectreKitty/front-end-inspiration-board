@@ -1,7 +1,22 @@
+.main-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+.content-container {
+  padding-bottom: 5rem; /* Footer height */
+}
 
 .flex-container {
   display: flex;
   flex-direction: row;
+}
+
+.footer-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 5rem;
 }
 
 /* Responsive layout - makes a one column layout instead of a two-column layout */

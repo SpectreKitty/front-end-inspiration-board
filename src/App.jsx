@@ -6,6 +6,7 @@ import SelectedBoard from './components/SelectedBoard';
 import NewBoardForm from './components/NewBoardForm';
 import Cards from './components/Cards';
 import NewCard from './components/NewCardForm';
+import Footer from './components/Footer';
 import axios from 'axios';
 
 const kbaseURL = 'http://localhost:5000';
@@ -118,30 +119,50 @@ function App() {
       });
   };
 
-  return (
-    <div>
-      <Header />
-      <div className='flex-container' >
-        <Boards boards={boards.boards} onSelectBoard={handleSelectBoard} />
-        <SelectedBoard board={boards.selectedBoard} />
-        <NewBoardForm handleSubmit={handleSubmit}/>
-      </div>
-      {boards.selectedBoard
-        ? (
-          <div className='flex-container' >
-            <Cards
-              boardTitle={boards.selectedBoard.title}
-              cards={boards.selectedBoard.cards}
-              onDelete={handleDeleteCard}
-              onLike={handleLikeCard}
-            />
-            <NewCard />
-          </div>
-        )
-        : null
-      }
-    </div>
-  )
-}
+  const handleDeleteAll = () => {
+    console.log('deleting everything')
+    axios.delete(`${kbaseURL}/boards`)
+      .then(() => {
+        setBoardData((prev) => ({
+          ...prev,
+          boards: [],
+          selectedBoard: null,
+        }));
+      })
+      .catch((error) => {
+        console.log('Unable to delete all boards: ', error);
+      });
+  };
 
-export default App
+  return (
+    <div className='main-container'>
+      <div className='content-container'>
+        <Header />
+        <div className='flex-container' >
+          <Boards boards={boards.boards} onSelectBoard={handleSelectBoard} />
+          <SelectedBoard board={boards.selectedBoard} />
+          <NewBoardForm handleSubmit={handleSubmit} />
+        </div>
+        {boards.selectedBoard
+          ? (
+            <div className='flex-container' >
+              <Cards
+                boardTitle={boards.selectedBoard.title}
+                cards={boards.selectedBoard.cards}
+                onDelete={handleDeleteCard}
+                onLike={handleLikeCard}
+              />
+              <NewCard />
+            </div>
+          )
+          : null
+        }
+      </div>
+      <footer className='footer-container'>
+        <Footer onDelete={handleDeleteAll} />
+      </footer>
+    </div>
+  );
+};
+
+export default App;
