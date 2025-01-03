@@ -1,16 +1,34 @@
-import './ComponentStyles.css'
+import PropTypes from 'prop-types';
+import './ComponentStyles.css';
+import './Boards.css';
 
-function Boards() {
+function Boards({ boards, onSelectBoard }) {
   return (
-    <div className="section">
-      <h3>Boards</h3>
-      <ul>
-        <li>Board 1</li>
-        <li>Board 2</li>
-        <li>Board 3</li>
+    <div className="component-section">
+      <h3 className="component-title">Boards</h3>
+      <ul className="boards-list">
+        {boards.map((board) => (
+          <li
+            key={board.id}
+            onClick={() => onSelectBoard(board)}
+          >
+            {board.title}
+          </li>
+        ))}
       </ul>
     </div>
   )
 }
 
-export default Boards
+Boards.propTypes = {
+  boards: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      owner: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  onSelectBoard: PropTypes.func.isRequired,
+};
+
+export default Boards;

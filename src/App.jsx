@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Boards from './components/Boards';
 import SelectedBoard from './components/SelectedBoard';
@@ -17,9 +17,47 @@ const convertFromApi = (apiBoard) => {
   return newBoard;
 };
 
-function App() {
-  const [boards, setBoardData] = useState([]);
+const getAllBoardsApi = () => {
+  return axios.get(`${kbaseURL}/boards`)
+    .then(response => {
+      const allBoards = response.data.map(convertFromApi);
+      return allBoards;
+    })
+    .catch(e => {
+      console.log(e);
+    });
+};
 
+function App() {
+  const [boards, setBoardData] = useState({
+    boards: [],
+    selectedBoard: null,
+  });
+
+  const getAllBoards = () => {
+    getAllBoardsApi()
+      .then(boards => {
+        setBoardData(prev => ({
+          ...prev,
+          boards,
+        }));
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };  
+
+  useEffect(() => {
+    getAllBoards();
+  }, []);
+
+  const handleSelectBoard = (board) => {
+    setBoardData((prev) => ({
+      ...prev,
+      selectedBoard: board,
+    }));
+  };
+  
   const handleSubmit = (data) => {
     axios.post(`${kbaseURL}/boards`, data)
       .then((result) => {
@@ -54,8 +92,8 @@ function App() {
         <Header />
       </div>
       <div className='flex-container' >
-        <Boards />
-        <SelectedBoard />
+        <Boards boards={boards.boards} onSelectBoard={handleSelectBoard} />
+        <SelectedBoard board={boards.selectedBoard} />
         <NewBoardForm handleSubmit={handleSubmit}/>
       </div>
       <div className='flex-container' >
