@@ -3,30 +3,27 @@ import Card from './Card';
 import './Cards.css';
 import './ComponentStyles.css';
 
-function Cards(props) {
+function Cards({ boardTitle, cards, onDelete, onLike }) {
   return (
-    <div className='component-section'>
-      <h3 className='component-title'>Cards for {props.boardTitle}</h3>
-      {
-        props.cards.length > 0
-        ? (
-          <div className='cards'>
-            {props.cards.map(card => {
-              return <Card
-                key={card.id}
-                id={card.id}
-                message={card.message}
-                likes={card.like_count}
-                onDelete={props.onDelete}
-                onLike={props.onLike}
-              />
-            })}
-          </div>)
-        : <p>No cards yet!</p>
-      }
+    <div className="component-section">
+      <h3 className="component-title">{boardTitle} - Cards</h3>
+      {cards && cards.length > 0 ? (
+        <ul>
+          {cards.map((card) => (
+            <li key={card.id} className="card-item">
+              <p>{card.message}</p>
+              <p>Likes: {card.like_count}</p>
+              <button onClick={() => onLike(card.id)}>Like</button>
+              <button onClick={() => onDelete(card.id)}>Delete</button>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No cards available for this board!</p>
+      )}
     </div>
   );
-};
+}
 
 Cards.propTypes = {
   boardTitle: PropTypes.string.isRequired,

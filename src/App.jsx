@@ -118,6 +118,26 @@ function App() {
       });
   };
 
+  const handleAddCard = (data) => {
+    if (!boards.selectedBoard) return;
+
+    axios.post(`${kbaseURL}/boards/${boards.selectedBoard.id}/cards`, data)
+      .then((result) => {
+        const newCard = result.data.card;
+        setBoardData((prev) => {
+          const updatedBoard = { ...prev.selectedBoard };
+          updatedBoard.cards = [...updatedBoard.cards, newCard];
+          return {
+            ...prev,
+            selectedBoard: updatedBoard,
+          };
+        });
+      })
+      .catch((error) => {
+        console.log('Unable to add card: ', error);
+      });
+  };
+
   return (
     <div>
       <Header />
@@ -126,8 +146,7 @@ function App() {
         <SelectedBoard board={boards.selectedBoard} />
         <NewBoardForm handleSubmit={handleSubmit}/>
       </div>
-      {boards.selectedBoard
-        ? (
+      {boards.selectedBoard && (
           <div className='flex-container' >
             <Cards
               boardTitle={boards.selectedBoard.title}
@@ -135,13 +154,12 @@ function App() {
               onDelete={handleDeleteCard}
               onLike={handleLikeCard}
             />
-            <NewCard />
+            <NewCard handleSubmit={handleAddCard} />
           </div>
         )
-        : null
       }
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
