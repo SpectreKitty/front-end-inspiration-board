@@ -11,18 +11,6 @@ function SelectedBoard({ board, onAddCard }) {
           <p>
             {board.title} - {board.owner}
           </p>
-          {/* <h4>Cards:</h4>
-          <ul>
-            {board.cards && board.cards.length > 0 ? (
-              board.cards.map((card) => (
-                <li key={card.id}>
-                  {card.message} (Likes: {card.like_count})
-                </li>
-              ))
-            ) : (
-              <p>No cards available!</p>
-            )}
-          </ul> */}
         </div>
       ) : (
         <p>No board selected</p>

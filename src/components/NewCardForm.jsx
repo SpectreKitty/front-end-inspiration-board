@@ -8,15 +8,18 @@ const NewCardForm = (props) => {
   });
 
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const onMessageChange = (event) => {
     const newMessage = event.target.value;
 
     // check for validation
     if (newMessage.length > 40) {
-      setError('Message cannnot be more than 40 characters.');
+      setError('Message cannot be more than 40 characters.');
+      setSuccessMessage('');
     } else if (newMessage.trim() === '') {
       setError('Message cannot be blank.');
+      setSuccessMessage('');
     } else {
       setError(''); // clear the error
     }
@@ -39,14 +42,13 @@ const NewCardForm = (props) => {
       message: formFields.message,
     });
 
-    setFormFields({
-      message: '',
-    });
+    setFormFields({ message: '',});
     setError('');
+    setSuccessMessage('Card added successfully!');
   };
 
   return (
-    <div className="new-card-form">
+    <div className="new-card-form flex-container">
     <h3>Create a New Card</h3>
     <form onSubmit={onFormSubmit}>
       <label htmlFor="message">Message:</label>
@@ -73,6 +75,7 @@ const NewCardForm = (props) => {
         />
       </div>
     </form>
+    {successMessage && <div className="success-message">{successMessage}</div>}
   </div>
   );
 };

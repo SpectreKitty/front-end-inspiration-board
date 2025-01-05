@@ -1,7 +1,12 @@
 
 .flex-container {
-  display: flex;
-  flex-direction: row;
+  /* display: flex;
+  flex-direction: row; */
+  display: flex; /* Align forms horizontally */
+  justify-content: center; /* Center the forms */
+  align-items: flex-start; /* Align forms to the top */
+  gap: 2rem; /* Add space between the forms */
+  margin: 1rem 0; /* Add spacing around the container */
 }
 
 /* Responsive layout - makes a one column layout instead of a two-column layout */

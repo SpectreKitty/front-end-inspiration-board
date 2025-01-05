@@ -5,7 +5,7 @@ import Boards from './components/Boards';
 import SelectedBoard from './components/SelectedBoard';
 import NewBoardForm from './components/NewBoardForm';
 import Cards from './components/Cards';
-import NewCard from './components/NewCardForm';
+import NewCardForm from './components/NewCardForm';
 import axios from 'axios';
 
 const kbaseURL = 'http://localhost:5000';
@@ -118,15 +118,20 @@ function App() {
       });
   };
 
+  // 
   const handleAddCard = (data) => {
     if (!boards.selectedBoard) return;
-
+  
     axios.post(`${kbaseURL}/boards/${boards.selectedBoard.id}/cards`, data)
       .then((result) => {
         const newCard = result.data.card;
+  
         setBoardData((prev) => {
-          const updatedBoard = { ...prev.selectedBoard };
-          updatedBoard.cards = [...updatedBoard.cards, newCard];
+          const updatedBoard = {
+            ...prev.selectedBoard,
+            cards: [...(prev.selectedBoard.cards || []), newCard],
+          };
+  
           return {
             ...prev,
             selectedBoard: updatedBoard,
@@ -154,7 +159,7 @@ function App() {
               onDelete={handleDeleteCard}
               onLike={handleLikeCard}
             />
-            <NewCard handleSubmit={handleAddCard} />
+            <NewCardForm onCardAdd={handleAddCard} />
           </div>
         )
       }
