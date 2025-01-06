@@ -119,20 +119,15 @@ function App() {
       });
   };
 
-  // 
   const handleAddCard = (data) => {
     if (!boards.selectedBoard) return;
   
     axios.post(`${kbaseURL}/boards/${boards.selectedBoard.id}/cards`, data)
       .then((result) => {
-        const newCard = result.data.card;
-  
+        const newCard = result.data;
         setBoardData((prev) => {
-          const updatedBoard = {
-            ...prev.selectedBoard,
-            cards: [...(prev.selectedBoard.cards || []), newCard],
-          };
-  
+          const updatedBoard = { ...prev.selectedBoard };
+          updatedBoard.cards.push(newCard);
           return {
             ...prev,
             selectedBoard: updatedBoard,
@@ -177,7 +172,7 @@ function App() {
                 onDelete={handleDeleteCard}
                 onLike={handleLikeCard}
               />
-              <NewCard />
+              <NewCardForm onCardAdd={handleAddCard}/>
             </div>
           )
           : null
