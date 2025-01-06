@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import './ComponentStyles.css';
-import NewCardForm from './NewCardForm';
 
-function SelectedBoard({ board, onAddCard }) {
+function SelectedBoard({ board }) {
   return (
     <div className="component-section">
       <h3 className="component-title">Selected Board</h3>
