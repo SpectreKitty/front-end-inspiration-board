@@ -9,7 +9,7 @@ import NewCardForm from './components/NewCardForm';
 import Footer from './components/Footer';
 import axios from 'axios';
 
-const kbaseURL = 'http://localhost:5000';
+const kbaseURL = 'https://team-6-back-end-inspo-board.onrender.com';
 
 const convertFromApi = (apiBoard) => {
   const newBoard = {
