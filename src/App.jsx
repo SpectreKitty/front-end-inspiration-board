@@ -10,7 +10,7 @@ import Footer from './components/Footer';
 import axios from 'axios';
 
 // const kbaseURL = 'http://localhost:5000';
-const kbaseURL = 'https://back-end-inspiration-board-evlk.onrender.com';
+const kbaseURL = 'https://team-6-back-end-inspo-board.onrender.com/';
 
 const convertFromApi = (apiBoard) => {
   const newBoard = {
