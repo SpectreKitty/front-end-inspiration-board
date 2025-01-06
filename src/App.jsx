@@ -140,7 +140,6 @@ function App() {
   };
 
   const handleDeleteAll = () => {
-    console.log('deleting everything')
     axios.delete(`${kbaseURL}/boards`)
       .then(() => {
         setBoardData((prev) => ({
