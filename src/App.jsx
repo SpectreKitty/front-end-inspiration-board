@@ -9,7 +9,7 @@ import NewCardForm from './components/NewCardForm';
 import Footer from './components/Footer';
 import axios from 'axios';
 
-const kbaseURL = 'https://team-6-back-end-inspo-board.onrender.com';
+const kbaseURL = import.meta.env.VITE_APP_BACKEND_URL;
 
 const convertFromApi = (apiBoard) => {
   const newBoard = {
@@ -46,7 +46,7 @@ function App() {
       .catch(e => {
         console.log(e);
       });
-  };  
+  };
 
   useEffect(() => {
     getAllBoards();
@@ -78,7 +78,7 @@ function App() {
             selectedBoard: updatedBoard,
           };
         });
-       })
+      })
       .catch((error) => {
         console.log('Unable to delete card: ', error);
       });
@@ -100,11 +100,11 @@ function App() {
           };
         })
       })
-      .catch((error) => { 
+      .catch((error) => {
         console.log('Unable to like card', error);
       });
   }
-  
+
   const handleSubmit = (data) => {
     axios.post(`${kbaseURL}/boards`, data)
       .then((result) => {
@@ -121,7 +121,7 @@ function App() {
 
   const handleAddCard = (data) => {
     if (!boards.selectedBoard) return;
-  
+
     axios.post(`${kbaseURL}/boards/${boards.selectedBoard.id}/cards`, data)
       .then((result) => {
         const newCard = result.data;
@@ -171,7 +171,7 @@ function App() {
                 onDelete={handleDeleteCard}
                 onLike={handleLikeCard}
               />
-              <NewCardForm onCardAdd={handleAddCard}/>
+              <NewCardForm onCardAdd={handleAddCard} />
             </div>
           )
           : null
