@@ -1,5 +1,5 @@
 {
-  "homepage": "https://[your-github-username].github.io/[your-repo-name]",
+  "homepage": "https://spectrekitty.github.io/front-end-inspiration-board",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
